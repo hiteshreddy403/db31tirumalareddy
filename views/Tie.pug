@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the Tie pug
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let Tie = [
+                    {
+                        "brand": "centuarLino Perros",
+                        "material": "cotton",
+                        "cost": 10
+                    },
+                    {
+                        "brand": "Louis Philippe",
+                        "material": "cotton",
+                        "cost": 20
+                    },
+                    {
+                        "brand": "Puma",
+                        "material": "cotton",
+                        "cost": 30
+                    },                   
+                ]
+            each v,index in Tie
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.material}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}
+  script.                
+    function buy(itemNo)
+    {
+        alert(`you purchased Item ${itemNo+1}`)
+    }                
