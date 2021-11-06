@@ -1,7 +1,7 @@
 # fwb31tirumalareddy
-Assignment pug
+Assignment 
 
-Hosted at https://hiteshpug.herokuapp.com/
+Hosted at https://tirumalareddyassignment.herokuapp.com/
 
 class Tie: brand(string),material(string),cost(Number)
 
