@@ -22,7 +22,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 //var university = require('./routes/university');
 var addmods = require('./routes/addmods');
-var selector = require('./routes/Selector');
+var selector = require('./routes/selector');
 var resource = require('./routes/resource');
 var costume = require('./routes/costumes')
 
