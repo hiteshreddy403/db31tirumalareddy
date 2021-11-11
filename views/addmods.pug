@@ -2,23 +2,23 @@ extends layout
 
 block content
   h1= title
-  p Rows = #{query.rows} and Columns = #{query.cols}
+  p Welcome to #{title} Js
+  p Rows = #{query.rows} and Columns = #{query.cols} we except
     -
         rows= Number(query.rows)
         col= Number(query.cols)
     if !Number.isInteger(rows)
         p below mentioned rows are not accurate 
     else if !Number.isInteger(col)
-        p below mentioned columns are not appropriate 
-    else if rows < 0 || rows > 5
-        p below mentioned rows are in one to four range 
-    else if col < 0 || col > 5
-        p below mentioned colums are in one to four range
+        p below mentioned columns are not appropriate
     else
        table           
             - for(let i=0; i<rows; i++) {
                tr
-                 - for(let k=i; k<col+i; k++) {
-                     td= k 
-                 -}              
+                 - for(let j=i; j<col-1; j++) {
+                    td=j
+                 -}        
+                 -   for(let k=0; k<=i; k++){
+                      td=k
+                 -}      
             - }

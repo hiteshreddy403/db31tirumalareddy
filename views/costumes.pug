@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title} web apps
+    - let items = results 
+      each item, key in items
+            div(class="row")
+                div(class="col-sm-2" onclick=`buy(${key+1})` ) #{item.costume_type}
+                div(class="col-sm-2"  onclick=`buy(${key+1})`) #{item.size}
+                div(class="col-sm-2" onclick=`buy(${key+1})`) #{item.cost}
+    
