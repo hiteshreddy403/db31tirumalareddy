@@ -7,5 +7,5 @@ var router = express.Router();
      res.render('persis', { title: 'Search Results for persis' });
  });
 
-router.get('/',costume_controlers.costume_view_all_Page);
-module.exports = router;
+//router.get('/',costume_controlers.costume_view_all_Page);
+//module.exports = router;
