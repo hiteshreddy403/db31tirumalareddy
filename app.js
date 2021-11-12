@@ -26,8 +26,8 @@ var usersRouter = require('./routes/users');
 var addmods = require('./routes/addmods');
 var selector = require('./routes/selector');
 var resource = require('./routes/resource');
-var costume = require('./routes/costumes')
-
+var costume = require('./routes/costumes');
+var persis = require('./routes/persis');
 
 var app = express();
 
@@ -43,11 +43,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/persis', persis);
 //app.use('/university',university);
 app.use('/addmods', addmods);
 app.use('/selector', selector);
 app.use('/resource', resource);
-app.use('/costume', costume)
+app.use('/costume', costume);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
