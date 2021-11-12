@@ -3,20 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var Costume = require("./models/costume"); 
+var Costume = require("./models/costume");
 // database connection
-const connectionString =  
-process.env.MONGO_CON 
-mongoose = require('mongoose'); 
-mongoose.connect(connectionString,  
-{useNewUrlParser: true, 
-useUnifiedTopology: true});
- 
+const connectionString = "mongodb+srv://learningmongo:shashank1214@cluster0.p5q2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+
 //Bind connection to error event
-var db = mongoose.connection;   
-db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
-db.once("open", function(){ 
- console.log("Connection to DB succeeded")});  
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function () {
+  console.log("Connection to DB succeeded")
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -25,6 +27,7 @@ var addmods = require('./routes/addmods');
 var selector = require('./routes/selector');
 var resource = require('./routes/resource');
 var costume = require('./routes/costumes')
+
 
 var app = express();
 
@@ -41,18 +44,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //app.use('/university',university);
-app.use('/addmods',addmods);
-app.use('/selector',selector);
-app.use('/resource',resource);
-app.use('/costume',costume)
+app.use('/addmods', addmods);
+app.use('/selector', selector);
+app.use('/resource', resource);
+app.use('/costume', costume)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -63,36 +66,42 @@ app.use(function(err, req, res, next) {
 });
 
 // We can seed the collection if needed on 
-async function recreateDB(){ 
+async function recreateDB() {
   // Delete everything 
-  await Costume.deleteMany();  
-  let instance1 = new 
-Costume({costume_type:"coat",  size:'large', 
-cost:25.4}); 
-  instance1.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("First object saved") 
-  }); 
-
-let instance2 = new 
-Costume({costume_type:"pant",  size:'medium', 
-cost:25.4}); 
-  instance2.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("second object saved") 
+  await Costume.deleteMany();
+  let instance1 = new
+    Costume({
+      costume_type: "coat", size: 'large',
+      cost: 25.4
+    });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
   });
-  
-let instance3 = new 
-Costume({costume_type:"jeans",  size:'medium', 
-cost:25.4}); 
-  instance3.save( function(err,doc) { 
-      if(err) return console.error(err); 
-      console.log("second object saved") 
-  }); 
-} 
- 
 
-let reseed = true; 
-if (reseed) { recreateDB();} 
+  let instance2 = new
+    Costume({
+      costume_type: "pant", size: 'medium',
+      cost: 25.4
+    });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("second object saved")
+  });
+
+  let instance3 = new
+    Costume({
+      costume_type: "jeans", size: 'medium',
+      cost: 25.4
+    });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("second object saved")
+  });
+}
+
+
+let reseed = true;
+if (reseed) { recreateDB(); }
 
 module.exports = app;
