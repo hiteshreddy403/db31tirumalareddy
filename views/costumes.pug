@@ -9,4 +9,7 @@ block content
                 div(class="col-sm-2" onclick=`buy(${key+1})` ) #{item.costume_type}
                 div(class="col-sm-2"  onclick=`buy(${key+1})`) #{item.size}
                 div(class="col-sm-2" onclick=`buy(${key+1})`) #{item.cost}
+                div(class="col-sm-2")
+                  button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+                  button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
     
