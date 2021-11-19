@@ -38,7 +38,7 @@ var university = require('./routes/university');
 var addmods = require('./routes/addmods');
 var selector = require('./routes/Selector');
 var resource = require('./routes/resource');
-var costume = require('./routes/costumes')
+var costume = require('./routes/costumes');
 
 var app = express();
 
