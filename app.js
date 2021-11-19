@@ -67,7 +67,7 @@ app.use('/university',university);
 app.use('/addmods',addmods);
 app.use('/selector',selector);
 app.use('/resource',resource);
-app.use('/costume',costume)
+app.use('/costume',costume);
 
 // passport config 
 // Use the existing connection 
