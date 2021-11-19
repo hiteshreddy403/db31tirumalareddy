@@ -18,11 +18,12 @@ passport.use(new LocalStrategy(
       return done(null, user); 
     }); 
   } ));
-var Costume = require("./models/costume"); 
+var Costume = require("./models/costume");
 // database connection
-const connectionString = process.env.MONGO_CON
+const connectionString =  
+process.env.MONGO_CON 
 mongoose = require('mongoose'); 
-mongoose.connect(connectionString,  
+mongoose.connect('mongodb+srv://learningmongo:shashank1214@cluster0.p5q2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',  
 {useNewUrlParser: true, 
 useUnifiedTopology: true});
  
@@ -30,15 +31,17 @@ useUnifiedTopology: true});
 var db = mongoose.connection;   
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 db.once("open", function(){ 
- console.log("Connection to DB succeeded")});  
+ console.log("Connection to DB succeeded")});
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var university = require('./routes/university');
-var addmods = require('./routes/addmods');
-var selector = require('./routes/Selector');
+var persisRouter = require('./routes/persis');
+var addmodsRouter = require('./routes/addmods');
+var selectorRouter = require('./routes/selector');
 var resource = require('./routes/resource');
-var costume = require('./routes/costumes');
+var costume = require('./routes/costumes')
+ 
 
 var app = express();
 
@@ -57,17 +60,15 @@ app.use(require('express-session')({
 })); 
 app.use(passport.initialize()); 
 app.use(passport.session()); 
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/university',university);
-app.use('/addmods',addmods);
-app.use('/selector',selector);
+app.use('/persis', persisRouter);
+app.use('/addmods', addmodsRouter);
+app.use('/selector', selectorRouter);
 app.use('/resource',resource);
-app.use('/costume',costume);
+app.use('/costume',costume)
 
 // passport config 
 // Use the existing connection 
@@ -77,14 +78,13 @@ var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate())); 
 passport.serializeUser(Account.serializeUser()); 
 passport.deserializeUser(Account.deserializeUser()); 
-
- // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -97,7 +97,7 @@ app.use(function(err, req, res, next) {
 // We can seed the collection if needed on 
 async function recreateDB(){ 
   // Delete everything 
-  //await Costume.deleteMany();  
+ await Costume.deleteMany();  
   let instance1 = new 
 Costume({costume_type:"coat",  size:'large', 
 cost:25.4}); 
@@ -126,5 +126,6 @@ cost:25.4});
 
 let reseed = true; 
 if (reseed) { recreateDB();} 
+
 
 module.exports = app;
